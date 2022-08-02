@@ -1,3 +1,3 @@
 export const USER_LOGIN = 'USER_LOGIN';
 
-export const anything = 'anything';
+export const FETCH_CURR = 'FETCH_CURRENCIES';
