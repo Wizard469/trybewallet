@@ -1,3 +1,5 @@
 export const USER_LOGIN = 'USER_LOGIN';
 
-export const FETCH_CURR = 'FETCH_CURRENCIES';
+export const FETCH_CURR_CODE = 'FETCH_CURRENCIES_CODE';
+
+export const ADD_EXPENSES = 'ADD_EXPENSES';

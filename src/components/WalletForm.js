@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { arrayOf, string, func } from 'prop-types';
-import { fetchCurrencies } from '../redux/actions/index';
+import { addExpenses, fetchCurrenciesCode } from '../redux/actions/index';
+
+const alimentacao = 'Alimentação';
 
 class WalletForm extends Component {
   constructor() {
     super();
     this.state = {
-      price: 0,
+      value: '0',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: alimentacao,
       description: '',
     };
   }
@@ -26,23 +28,44 @@ class WalletForm extends Component {
     this.setState({ [name]: value });
   }
 
+  onHandleInputClick = () => {
+    const { value } = this.state;
+    if (value === '0') {
+      this.setState({ value: '' });
+    }
+  }
+
+  onHandleClick = () => {
+    const { addExpense } = this.props;
+
+    addExpense(this.state);
+    this.setState({
+      value: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: alimentacao,
+      description: '',
+    });
+  }
+
   render() {
     const payment = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
-    const categories = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
-    const { price, currency, method, tag, description } = this.state;
+    const categories = [alimentacao, 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+    const { value, currency, method, tag, description } = this.state;
     const { currencies } = this.props;
 
     return (
       <form>
-        <label htmlFor="price">
+        <label htmlFor="value">
           Valor:
           <input
             data-testid="value-input"
             onChange={ this.onHandleChange }
+            onClick={ this.onHandleInputClick }
             type="text"
-            id="price"
-            name="price"
-            value={ price }
+            id="value"
+            name="value"
+            value={ value }
           />
         </label>
         <label htmlFor="currency">
@@ -101,6 +124,9 @@ class WalletForm extends Component {
             value={ description }
           />
         </label>
+        <button type="button" onClick={ this.onHandleClick }>
+          Adicionar despesa
+        </button>
       </form>
     );
   }
@@ -109,6 +135,7 @@ class WalletForm extends Component {
 WalletForm.propTypes = {
   currencies: arrayOf(string),
   fetchCurr: func,
+  addExpense: func,
 }.isRequired;
 
 const mapStateToProps = ({ wallet: { currencies } }) => ({
@@ -116,7 +143,8 @@ const mapStateToProps = ({ wallet: { currencies } }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCurr: () => dispatch(fetchCurrencies()),
+  fetchCurr: () => dispatch(fetchCurrenciesCode()),
+  addExpense: (expense) => dispatch(addExpenses(expense)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
