@@ -18,10 +18,7 @@ class Login extends Component {
     const passwordMinLength = 6;
     const filter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-    if (filter.test(email) && password.length >= passwordMinLength) {
-      return false;
-    }
-    return true;
+    return !(filter.test(email) && password.length >= passwordMinLength);
   }
 
   onHandleChange = ({ target }) => {
