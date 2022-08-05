@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { arrayOf, string, func } from 'prop-types';
 import { addExpenses, fetchCurrenciesCode } from '../redux/actions/index';
 
-const alimentacao = 'Alimentação';
-
 class WalletForm extends Component {
   constructor() {
     super();
@@ -12,7 +10,7 @@ class WalletForm extends Component {
       value: '0',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: alimentacao,
+      tag: 'Alimentação',
       description: '',
     };
   }
@@ -41,16 +39,13 @@ class WalletForm extends Component {
     addExpense(this.state);
     this.setState({
       value: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: alimentacao,
       description: '',
     });
   }
 
   render() {
     const payment = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
-    const categories = [alimentacao, 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+    const categories = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     const { value, currency, method, tag, description } = this.state;
     const { currencies } = this.props;
 
