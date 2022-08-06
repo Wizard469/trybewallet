@@ -1,4 +1,6 @@
-import { USER_LOGIN, FETCH_CURR_CODE, ADD_EXPENSES } from './actionTypes';
+import {
+  USER_LOGIN, FETCH_CURR_CODE, ADD_EXPENSES, REMOVE_EXPENSES,
+} from './actionTypes';
 
 const CURRENCIES_URL = 'https://economia.awesomeapi.com.br/json/all';
 const USDT = 'USDT';
@@ -20,3 +22,8 @@ export const addExpenses = (expense) => async (dispatch) => {
   const data = await response.json();
   dispatch({ type: ADD_EXPENSES, expense, data });
 };
+
+export const removeExpenses = (id) => ({
+  type: REMOVE_EXPENSES,
+  id,
+});

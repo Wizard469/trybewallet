@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { object } from 'prop-types';
+import { removeExpenses } from '../redux/actions';
 
 class Table extends Component {
+  deleteExpenses = (id) => {
+    const { deleteExpense } = this.props;
+    deleteExpense(id);
+  }
+
   render() {
     const three = 3;
     const { expenses } = this.props;
@@ -29,7 +35,6 @@ class Table extends Component {
                 {Math.round(
                   Number(expense.exchangeRates[expense.currency].ask) * 100,
                 ) / 100}
-
               </td>
               <td>
                 {
@@ -39,6 +44,15 @@ class Table extends Component {
                 }
               </td>
               <td>Real</td>
+              <td>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  onClick={ () => this.deleteExpenses(expense.id) }
+                >
+                  Excluir
+                </button>
+              </td>
             </tr>
           )) }
         </tbody>
@@ -55,4 +69,8 @@ const mapStateToProps = ({ wallet: { expenses } }) => ({
   expenses,
 });
 
-export default connect(mapStateToProps)(Table);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpense: (id) => dispatch(removeExpenses(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
