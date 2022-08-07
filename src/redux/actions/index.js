@@ -1,5 +1,6 @@
 import {
-  USER_LOGIN, FETCH_CURR_CODE, ADD_EXPENSES, REMOVE_EXPENSES,
+  USER_LOGIN, FETCH_CURR_CODE, ADD_EXPENSES,
+  REMOVE_EXPENSES, EDIT_EXPENSES, UPDATE_EXPENSES,
 } from './actionTypes';
 
 const CURRENCIES_URL = 'https://economia.awesomeapi.com.br/json/all';
@@ -26,4 +27,14 @@ export const addExpenses = (expense) => async (dispatch) => {
 export const removeExpenses = (id) => ({
   type: REMOVE_EXPENSES,
   id,
+});
+
+export const editExpenses = (id) => ({
+  type: EDIT_EXPENSES,
+  id,
+});
+
+export const updateExpenses = (expenses) => ({
+  type: UPDATE_EXPENSES,
+  expenses,
 });

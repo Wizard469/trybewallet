@@ -50,6 +50,8 @@ describe('Testing requirement one', () => {
         currencies: [],
         expenses: [],
         expensesCounter: 0,
+        idToEdit: 0,
+        editor: false,
      },
     }
 
