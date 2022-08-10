@@ -22,7 +22,7 @@ class Table extends Component {
       'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão', 'Editar/Excluir'];
 
     return (
-      <table>
+      <table border="1" cellSpacing="0" cellPadding="5">
         <thead>
           <tr>
             { tableDis.map((item) => <th key={ item }>{ item }</th>) }

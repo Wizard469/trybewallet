@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { func, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import { setUserEmail } from '../redux/actions/index';
+import '../styles/login.css';
 
 class Login extends Component {
   constructor() {
@@ -40,38 +41,40 @@ class Login extends Component {
     const { email, password, isBtnDisabled } = this.state;
 
     return (
-      <form>
-        <label htmlFor="email">
-          <input
-            data-testid="email-input"
-            onChange={ this.onHandleChange }
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-            value={ email }
-          />
-        </label>
-        <label htmlFor="password">
-          <input
-            data-testid="password-input"
-            onChange={ this.onHandleChange }
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Senha"
-            value={ password }
-          />
-        </label>
-        <button
-          onClick={ this.onHandleClick }
-          type="button"
-          disabled={ isBtnDisabled }
-        >
-          Entrar
+      <div className="login-container">
+        <form>
+          <label htmlFor="email">
+            <input
+              data-testid="email-input"
+              onChange={ this.onHandleChange }
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              value={ email }
+            />
+          </label>
+          <label htmlFor="password">
+            <input
+              data-testid="password-input"
+              onChange={ this.onHandleChange }
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Senha"
+              value={ password }
+            />
+          </label>
+          <button
+            onClick={ this.onHandleClick }
+            type="button"
+            disabled={ isBtnDisabled }
+          >
+            Entrar
 
-        </button>
-      </form>
+          </button>
+        </form>
+      </div>
     );
   }
 }
